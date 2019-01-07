@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <img src="/static/button.png" class="click" @click="changeDices" />
+    <img :src="button" class="click" @click="changeDices" />
     <div class="dices">
       <img class="dice" v-for="(item, index) of dices" :key="index" :src="diceImgs[item - 1]">
     </div>
@@ -30,6 +30,7 @@ import {
   dice5,
   dice6,
   sound,
+  button,
 } from '../../config/source.js'
 
 let rule = {
@@ -46,6 +47,7 @@ export default {
   },
   data() {
     return {
+      button,
       dices: [
         6,
         6,
