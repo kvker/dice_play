@@ -1,7 +1,7 @@
 <import src="/components/ad.vue.wxml" />
 <template name="65e73e8e">
   <view class="_div data-v-a12a4c42 container">
-    <image src="/static/button.png" class="_img data-v-a12a4c42 click" bindtap="handleProxy" data-eventid="{{'ID4-0'}}" data-comkey="{{$k}}"></image>
+    <image src="/static/button.png" class="_img data-v-a12a4c42 click" bindtap="handleProxy" data-eventid="{{'pE7-0'}}" data-comkey="{{$k}}"></image>
     <view class="_div data-v-a12a4c42 dices">
       <image class="_img data-v-a12a4c42 dice" wx:key="index" key="{{index}}" src="{{diceImgs[item - 1]}}" wx:for="{{dices}}" wx:for-index="index" wx:for-item="item"></image>
     </view>
@@ -11,7 +11,7 @@
         <image class="_img data-v-a12a4c42 dice-small" src="{{diceImgs[item.dice - 1]}}"></image>
       </label>
     </view>
-    <button class="_button data-v-a12a4c42 help" bindtap="handleProxy" data-eventid="{{'0V5-1'}}" data-comkey="{{$k}}">?</button>
-    <template data="{{...$root['0'], ...$root[$kk+'zyq-0'],$root}}" is="3baf4dc0"></template>
+    <button class="_button data-v-a12a4c42 help" bindtap="handleProxy" data-eventid="{{'fRE-1'}}" data-comkey="{{$k}}">?</button>
+    <template data="{{...$root['0'], ...$root[$kk+'swJ-0'],$root}}" is="3baf4dc0"></template>
   </view>
 </template>

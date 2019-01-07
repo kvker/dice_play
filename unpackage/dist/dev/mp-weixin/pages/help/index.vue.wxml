@@ -61,6 +61,6 @@
         <image class="_img data-v-f4134b2c dice" src="{{diceImgs[4]}}"></image>
       </view>
     </view>
-    <template data="{{...$root['0'], ...$root[$kk+'SbT-0'],$root}}" is="3baf4dc0"></template>
+    <template data="{{...$root['0'], ...$root[$kk+'tkU-0'],$root}}" is="3baf4dc0"></template>
   </view>
 </template>
