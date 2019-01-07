@@ -1,0 +1,22 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "摇骰子辅助工具"
+      }
+    },
+    {
+      "path": "pages/help/index",
+      "style": {
+        "navigationBarTitleText": "帮助页面"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "摇骰子辅助工具",
+    "navigationBarBackgroundColor": "#d3ffd0",
+    "backgroundColor": "#F8F8F8"
+  }
+}
