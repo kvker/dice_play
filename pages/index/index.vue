@@ -4,8 +4,10 @@
     <div class="dices">
       <img class="dice" v-for="(item, index) of dices" :key="index" :src="diceImgs[item - 1]">
     </div>
-    <div v-if="results.length > 1" class="results">
-      <span class="straight" v-if="results.length === 1">顺子, 全部 0 个</span>
+    <div v-if="results.length === 1" class="results">
+      <span class="straight">顺子, 全部 0 个</span>
+    </div>
+    <div v-else class="results">
       <span
         class="result"
         v-for="(item, index) of results"
@@ -32,16 +34,6 @@ import {
   sound,
   button,
 } from '../../config/source.js'
-// let {
-//   dice1,
-//   dice2,
-//   dice3,
-//   dice4,
-//   dice5,
-//   dice6,
-//   sound,
-//   button,
-// } = obj
 
 let rule = {
   diceCount: 5,
