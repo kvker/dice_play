@@ -32,6 +32,16 @@ import {
   sound,
   button,
 } from '../../config/source.js'
+// let {
+//   dice1,
+//   dice2,
+//   dice3,
+//   dice4,
+//   dice5,
+//   dice6,
+//   sound,
+//   button,
+// } = obj
 
 let rule = {
   diceCount: 5,
