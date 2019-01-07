@@ -55,9 +55,8 @@
     }
   },
   "h5": {
-    "title": "摇骰子辅助工具",
-    "devServer": {
-      "baseUrl": "./"
+    "router": {
+      "base": "/DicePlay/unpackage/dist/build/h5/"
     }
   }
 }
