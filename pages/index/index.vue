@@ -9,13 +9,13 @@
       </view>
     </view>
     <view v-if="results.length === 1" class="results">
-      <span class="straight">顺子, 全部 0 个</span>
+      <text class="straight">顺子, 全部 0 个</text>
     </view>
     <view v-else class="results">
-      <span class="result" v-for="(item, index) of results" :key="index">
-        {{item.count}} 个
+      <view class="result" v-for="(item, index) of results" :key="index">
+        <text>{{item.count}} 个</text>
         <image class="dice-small" :src="diceImgs[item.dice - 1]"></image>
-      </span>
+      </view>
     </view>
     <button class="help" @click="clickHelp">?</button>
     <my-ad/>
@@ -174,10 +174,12 @@ export default {
 
 <style scoped>
 .container {
+  --height: 92upx;
+  --top: 80upx;
   padding: 0;
 }
 .change {
-  margin-top: 80upx;
+  margin-top: var(--top);
   border-radius: 46upx;
 }
 .change-hover {
@@ -185,7 +187,7 @@ export default {
 }
 .change-image {
   width: 440upx;
-  height: 92upx;
+  height: var(--height);
 }
 .dices {
   display: flex;
@@ -201,15 +203,13 @@ export default {
   width: 50%;
 }
 .dice-image {
-  width: 100upx;
-  height: 100upx;
+  --width: 100upx;
+  width: var(--width);
+  height: var(--width);
 }
 .dice:nth-child(3n) {
   width: 100%;
   justify-content: center;
-}
-.dice:nth-child(3n + 1) {
-
 }
 .dice:nth-child(3n + 2) {
   justify-content: flex-end;
@@ -232,25 +232,25 @@ export default {
 }
 .result {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: 50%;
-  text-align: center;
   font-size: 40upx;
   color: #333;
   margin-top: 40upx;
 }
 .dice-small {
+  --width: 40upx;
   display: inline-block;
-  height: 40upx;
-  width: 40upx;
+  height: var(--width);
+  width: var(--width);
   margin-left: 16upx;
 }
 .help {
   position: absolute;
-  top: 100upx;
-  right: 16upx;
-  width: 80upx;
-  height: 80upx;
+  top: var(--top);
+  right: 20upx;
+  width: var(--height);
+  height: var(--height);
 }
 </style>

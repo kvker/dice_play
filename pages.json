@@ -9,7 +9,7 @@
     {
       "path": "pages/help/index",
       "style": {
-        "navigationBarTitleText": "帮助页面"
+        "navigationBarTitleText": "摇骰子介绍页面"
       }
     }
   ],
