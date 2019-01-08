@@ -1,25 +1,25 @@
 <template>
-  <div class="container">
-    <button class="clear-all change" hover-class="change-hover" @click="changeDices"><img :src="button" class="change-image" /></button>
-    <div class="dices">
-      <img class="dice" v-for="(item, index) of dices" :key="index" :src="diceImgs[item - 1]">
-    </div>
-    <div v-if="results.length === 1" class="results">
+  <view class="container">
+    <button class="clear-all change" hover-class="change-hover" @click="changeDices">
+      <image :src="button" class="change-image"></image>
+    </button>
+    <view class="dices">
+      <view class="dice" v-for="(item, index) of dices" :key="index">
+        <img mode="aspectFit" class="dice-image" :src="diceImgs[item - 1]">
+      </view>
+    </view>
+    <view v-if="results.length === 1" class="results">
       <span class="straight">顺子, 全部 0 个</span>
-    </div>
-    <div v-else class="results">
-      <span
-        class="result"
-        v-for="(item, index) of results"
-        :key="index"
-      >
+    </view>
+    <view v-else class="results">
+      <span class="result" v-for="(item, index) of results" :key="index">
         {{item.count}} 个
-        <img class="dice-small" :src="diceImgs[item.dice - 1]">
+        <image class="dice-small" :src="diceImgs[item.dice - 1]"></image>
       </span>
-    </div>
+    </view>
     <button class="help" @click="clickHelp">?</button>
-    <my-ad />
-  </div>
+    <my-ad/>
+  </view>
 </template>
 
 <script>
@@ -83,7 +83,7 @@ export default {
     initDices() {
       let dices = []
       for(let i = 0; i < rule.diceCount; i++) {
-      	dices.push(6)
+        dices.push(6)
       }
       this.dices = dices
     },
@@ -103,7 +103,7 @@ export default {
      */
     changeDices() {
       if(rule.close) return
-      
+
       this.innerAudioContext.stop()
       this.innerAudioContext.play()
       let newDices = []
@@ -188,23 +188,31 @@ export default {
   height: 92upx;
 }
 .dices {
+  display: flex;
+  justify-content: space-between;
+  align-content: space-between;
+  flex-wrap: wrap;
+  width: 400upx;
+  height: 360upx;
   margin-top: 16upx;
-  text-align: center;
 }
 .dice {
-  display: inline-block;
-  height: 100upx;
+  display: flex;
+  width: 50%;
+}
+.dice-image {
   width: 100upx;
+  height: 100upx;
 }
-.dice:nth-child(3) {
-  display: block;
-  margin-left: calc(50% - 50upx);
+.dice:nth-child(3n) {
+  width: 100%;
+  justify-content: center;
 }
-.dice:nth-child(2) {
-  margin-left: 200upx;
+.dice:nth-child(3n + 1) {
+
 }
-.dice:nth-child(5) {
-  margin-left: 200upx;
+.dice:nth-child(3n + 2) {
+  justify-content: flex-end;
 }
 .results {
   display: flex;

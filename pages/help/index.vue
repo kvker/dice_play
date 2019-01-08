@@ -62,7 +62,7 @@
         <img class="dice" :src="diceImgs[4]">
       </div>
     </div>
-    <my-ad />
+    <my-ad/>
   </div>
 </template>
 
@@ -94,34 +94,28 @@ export default {
 .container {
   padding: 0;
 }
-
 .help-container {
   display: flex;
   justify-content: space-between;
   height: 100%;
 }
-
 .dices {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   height: 100%;
 }
-
 .dice {
   display: inline-block;
   height: 120upx;
   width: 120upx;
 }
-
 .left {
   color: red;
 }
-
 .right {
   color: green;
 }
-
 .content {
   flex: 1;
   display: flex;
@@ -130,35 +124,30 @@ export default {
   padding: 32upx 16upx;
   overflow-y: auto;
 }
-
 span {
   margin-bottom: 16upx;
   font-size: 28upx;
 }
-
 .start {
   display: inline-block;
   margin-top: 16upx;
 }
-
 .special {
   color: blue;
   padding: 0 16upx;
   border-radius: 8upx;
-  background: rgba(190, 190, 190, .4);
+  background: rgba(190, 190, 190, 0.4);
 }
-
 .count {
   color: blue;
   padding: 0 16upx;
   border-radius: 8upx;
-  background: rgba(190, 190, 190, .4);
+  background: rgba(190, 190, 190, 0.4);
 }
-
 .number {
   color: green;
   padding: 0 16upx;
   border-radius: 8upx;
-  background: rgba(190, 190, 190, .4);
+  background: rgba(190, 190, 190, 0.4);
 }
 </style>
