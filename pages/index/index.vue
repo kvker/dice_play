@@ -36,11 +36,16 @@ import {
 } from '../../config/source.js'
 
 let rule = {
-  diceCount: 5,
-  close: false, // 禁止变化, 防止多次
-  closeTime: .25, // 两次最小间距时间, 默认 2
-  range: 3, // 摇一摇幅度
-  max: 6 // 骰子最大值
+  // 骰子个数
+  diceCount: 4,
+  // 禁止变化, 防止多次
+  close: false,
+  // 两次最小间距时间, 默认 2
+  closeTime: .25,
+  // 摇一摇幅度
+  range: 3,
+  // 骰子最大值
+  max: 6,
 }
 
 export default {
@@ -50,19 +55,14 @@ export default {
   data() {
     return {
       button,
-      dices: [
-        6,
-        6,
-        6,
-        6,
-        6 // 5 个骰子
-      ],
+      dices: [],
       results: [],
       diceImgs: [dice1, dice2, dice3, dice4, dice5, dice6],
       innerAudioContext: uni.createInnerAudioContext()
     }
   },
   onLoad() {
+    this.initDices()
     this.listenShake()
     this.innerAudioContext.src = sound
     //#ifdef MP-WEIXIN
@@ -77,6 +77,16 @@ export default {
     }
   },
   methods: {
+    /**
+     * 初始化骰子
+     */
+    initDices() {
+      let dices = []
+      for (let i = 0; i < rule.diceCount; i++) {
+      	dices.push(6)
+      }
+      this.dices = dices
+    },
     listenShake() {
       return uni.onAccelerometerChange((res) => { // 监听摇一摇事件
         let range = rule.range
