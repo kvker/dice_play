@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <img :src="button" class="click" @click="changeDices" />
+    <button class="clear-all change" hover-class="change-hover" @click="changeDices"><img :src="button" class="change-image" /></button>
     <div class="dices">
       <img class="dice" v-for="(item, index) of dices" :key="index" :src="diceImgs[item - 1]">
     </div>
@@ -176,42 +176,36 @@ export default {
 .container {
   padding: 0;
 }
-
-.click {
-  width: 440upx;
-  height: 92upx;
+.change {
   margin-top: 80upx;
   border-radius: 46upx;
 }
-
-.click:active {
-  box-shadow: 0 2upx 4upx 4upx #d8d8d8 inset;
+.change-hover {
+  box-shadow: 0 2upx 4upx 4upx #d8d8d8;
 }
-
+.change-image {
+  width: 440upx;
+  height: 92upx;
+}
 .dices {
   margin-top: 16upx;
   text-align: center;
 }
-
 .dice {
   display: inline-block;
   height: 100upx;
   width: 100upx;
 }
-
 .dice:nth-child(3) {
   display: block;
   margin-left: calc(50% - 50upx);
 }
-
 .dice:nth-child(2) {
   margin-left: 200upx;
 }
-
 .dice:nth-child(5) {
   margin-left: 200upx;
 }
-
 .results {
   display: flex;
   flex-wrap: wrap;
@@ -220,7 +214,6 @@ export default {
   border-bottom: 0;
   margin: 16upx 5% 0 5%;
 }
-
 .straight {
   line-height: 96upx;
   width: 100%;
@@ -229,7 +222,6 @@ export default {
   box-sizing: border-box;
   color: #00a;
 }
-
 .result {
   display: flex;
   align-items: center;
@@ -240,14 +232,12 @@ export default {
   color: #333;
   margin-top: 40upx;
 }
-
 .dice-small {
   display: inline-block;
   height: 40upx;
   width: 40upx;
   margin-left: 16upx;
 }
-
 .help {
   position: absolute;
   top: 100upx;
