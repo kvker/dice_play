@@ -37,7 +37,7 @@ import {
 
 let rule = {
   // 骰子个数
-  diceCount: 4,
+  diceCount: 5,
   // 禁止变化, 防止多次
   close: false,
   // 两次最小间距时间, 默认 2
@@ -82,28 +82,32 @@ export default {
      */
     initDices() {
       let dices = []
-      for (let i = 0; i < rule.diceCount; i++) {
+      for(let i = 0; i < rule.diceCount; i++) {
       	dices.push(6)
       }
       this.dices = dices
     },
+    /**
+     * 监听摇一摇
+     */
     listenShake() {
-      return uni.onAccelerometerChange((res) => { // 监听摇一摇事件
+      return uni.onAccelerometerChange((res) => {
         let range = rule.range
         if(res.x > range || res.y > range || res.z > range) {
           return this.changeDices()
         }
       })
     },
+    /**
+     * 改变骰子
+     */
     changeDices() {
-      let k, num
       if(rule.close) return
       
       this.innerAudioContext.stop()
       this.innerAudioContext.play()
       let newDices = []
-      let ref = rule.diceCount
-      for(num = k = 0; (0 <= ref ? k < ref : k > ref); num = 0 <= ref ? ++k : --k) {
+      for(let i = 0; i < rule.diceCount; i++) {
         newDices.push(Math.floor(Math.random() * rule.max) + 1)
       }
       this.dices = newDices
@@ -114,6 +118,10 @@ export default {
         return uni.hideLoading()
       }, rule.closeTime * 1000)
     },
+    /**
+     * 处理骰子计分逻辑
+     * @param {array} newDices 新骰子数组, 用来计算返还给 this.dices
+     */
     handleDices(newDices) {
       let i, j, k
       let newResults = []
@@ -121,9 +129,8 @@ export default {
         newResults.push('顺子, 全部为 0 个')
       } else {
         let countOne = 0 // 1 的特殊处理
-        let ref = rule.max
-        for(i = k = 0; (0 <= ref ? k < ref : k > ref); i = 0 <= ref ? ++k : --k) {
-          j = i + 1
+        for(let i = 0; i < rule.max; i++) {
+          let j = i + 1
           let countJ = this.howManyCount(j)
           countJ = countJ === rule.max ? 7 : countJ + countOne
           newResults.push({
@@ -138,19 +145,23 @@ export default {
       this.results = newResults
       uni.vibrateLong() // 震动
     },
+    /**
+     * 计分逻辑
+     */
     howManyCount(point) {
-      let index, k
       let count = 0
-      let ref = this.dices
-      let len = ref.length
-      for(index = k = 0; k < len; index = ++k) {
-        let item = ref[index]
+      let dices = this.dices
+      for(let i = 0; i < dices.length; i++) {
+        let item = dices[i]
         if(item === point) {
           count++
         }
       }
       return count
     },
+    /**
+     * 点击前往帮助
+     */
     clickHelp() {
       uni.navigateTo({
         url: '/pages/help/index'
