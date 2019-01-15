@@ -3,6 +3,7 @@
     <view class="ctrls">
       <picker class="picker-dice-number" @change="changePicker" :value="index" :range="supportDiceNumbers">
         <text>数量: {{supportDiceNumbers[index]}}</text>
+        <text class="pick-remind">少于5个比点</text>
       </picker>
       <image :src="button" class="change change-image" hover-class="change-hover" @click="changeDices"></image>
       <button class="help" @click="clickHelp">?</button>
@@ -40,7 +41,7 @@
   } from '@/config/source.js'
 
   let rule = {
-    supportDiceNumbers: [5, 6, 7, 8, 9],
+    supportDiceNumbers: [5, 6, 7, 8, 9, 4, 3, 2, 1],
     // 骰子个数
     diceCount: 5,
     // 禁止变化, 防止多次
@@ -51,6 +52,7 @@
     range: 3,
     // 骰子最大值
     max: 6,
+    minCount: 5,
   }
 
   // console.log(diceConfig)
@@ -149,6 +151,9 @@
           newDices.push(Math.floor(Math.random() * rule.max) + 1)
         }
         this.dices = newDices
+        // 如果数量少于最小值, 则当做普通骰子用
+        if(this.diceCount < rule.minCount) return
+        
         this.handleDices(newDices)
         rule.close = true
         return setTimeout(() => {
@@ -228,9 +233,19 @@
   }
   
   .picker-dice-number {
+    position: relative;
     width: var(--width);
     border: 2upx dashed #D8D8D8;
     padding: 2upx 4upx;
+  }
+  
+  .pick-remind {
+    position: absolute;
+    left: 0;
+    top: -80upx;
+    width: 200upx;
+    font-size: 24upx;
+    color: #999;
   }
 
   .change {
