@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import MyAd from '../../components/ad.vue'
+import MyAd from '@/components/ad.vue'
 import {
   dice1,
   dice2,
@@ -33,7 +33,7 @@ import {
   dice6,
   sound,
   button,
-} from '../../config/source.js'
+} from '@/config/source.js'
 
 let rule = {
   // 骰子个数

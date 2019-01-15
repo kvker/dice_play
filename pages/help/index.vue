@@ -2,11 +2,11 @@
   <view class="container">
     <view class="help-container">
       <view class="dices left">
-        <img class="dice" :src="diceImgs[0]">
-        <img class="dice" :src="diceImgs[1]">
-        <img class="dice" :src="diceImgs[2]">
-        <img class="dice" :src="diceImgs[3]">
-        <img class="dice" :src="diceImgs[4]">
+        <image class="dice" :src="diceImgs[0]"></image>
+        <image class="dice" :src="diceImgs[1]"></image>
+        <image class="dice" :src="diceImgs[2]"></image>
+        <image class="dice" :src="diceImgs[3]"></image>
+        <image class="dice" :src="diceImgs[4]"></image>
       </view>
       <view class="content">
         <text>左侧为您，右侧对手（可多个）</text>
@@ -87,11 +87,11 @@
         </view>
       </view>
       <view class="dices right">
-        <img class="dice" :src="diceImgs[1]">
-        <img class="dice" :src="diceImgs[1]">
-        <img class="dice" :src="diceImgs[2]">
-        <img class="dice" :src="diceImgs[2]">
-        <img class="dice" :src="diceImgs[4]">
+        <image class="dice" :src="diceImgs[1]"></image>
+        <image class="dice" :src="diceImgs[1]"></image>
+        <image class="dice" :src="diceImgs[2]"></image>
+        <image class="dice" :src="diceImgs[2]"></image>
+        <image class="dice" :src="diceImgs[4]"></image>
       </view>
     </view>
     <my-ad/>
@@ -99,7 +99,7 @@
 </template>
 
 <script>
-import MyAd from '../../components/ad.vue'
+import MyAd from '@/components/ad.vue'
 import {
   dice1,
   dice2,
@@ -107,13 +107,13 @@ import {
   dice4,
   dice5,
   dice6,
-} from '../../config/source.js'
+} from '@/config/source.js'
 
 export default {
   components: {
     MyAd,
   },
-  data: function() {
+  data() {
     return {
       diceImgs: [dice1, dice2, dice3, dice4, dice5, dice6]
     }
