@@ -118,7 +118,7 @@
     },
     onShareAppMessage() {
       return {
-        title: '摇9个骰子的博弈，兄弟，来吧！'
+        title: '君子九个骰，小人瑟瑟抖。'
       }
     },
     methods: {
