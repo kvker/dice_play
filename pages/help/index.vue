@@ -83,6 +83,7 @@
           <text>个</text>
           <text class="number">2</text>
           <text>，也可以再喊其他，让对手开你，或继续。。。</text>
+          <text>另外，如果全部一样，则多送一个。</text>
           <text class="start">至此，相信您有所了解该规则，感谢阅读。</text>
         </view>
       </view>

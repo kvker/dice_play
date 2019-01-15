@@ -3,7 +3,7 @@
     <view class="ctrls">
       <picker class="picker-dice-number" @change="changePicker" :value="index" :range="supportDiceNumbers">
         <text>数量: {{supportDiceNumbers[index]}}</text>
-        <text class="pick-remind">少于5个比点</text>
+        <!-- <text class="pick-remind">少于5个比点</text> -->
       </picker>
       <image :src="button" class="change change-image" hover-class="change-hover" @click="changeDices"></image>
       <button class="help" @click="clickHelp">?</button>
@@ -12,6 +12,9 @@
       <view class="dice" :style="diceStyles[index]" v-for="(item, index) of dices" :key="index">
         <img mode="aspectFit" class="dice-image" :src="diceImgs[item - 1]">
       </view>
+    </view>
+    <view v-if="lessThenMin && played" class="results">
+      <text class="straight">{{points}}点</text>
     </view>
     <view v-if="results.length === 1" class="results">
       <text class="straight">顺子, 全部 0 个</text>
@@ -52,6 +55,7 @@
     range: 3,
     // 骰子最大值
     max: 6,
+    // 可玩的最小值
     minCount: 5,
   }
 
@@ -63,6 +67,7 @@
     },
     data() {
       return {
+        played: false,
         index: 0,
         supportDiceNumbers: rule.supportDiceNumbers,
         button,
@@ -74,11 +79,24 @@
       }
     },
     computed: {
-      diceCount() {
+      /**
+       * 非摇骰子时候的点数
+       */
+      points() {
+        let res = this.dices.reduce((pre, cur) => pre + cur, 0)
+        return res
+      },
+      /**
+       * 是否低于可玩的最小值
+       */
+      lessThenMin() {
+        return this.playDiceCount < rule.minCount
+      },
+      playDiceCount() {
         return this.supportDiceNumbers[this.index]
       },
       diceStyles() {
-        let diceConfig = this.diceConfig[this.diceCount],
+        let diceConfig = this.diceConfig[this.playDiceCount],
           width = diceConfig.w,
           los = diceConfig.los,
           results = []
@@ -100,7 +118,7 @@
     },
     onShareAppMessage() {
       return {
-        title: '摇骰子就是博弈，兄弟，来吧！'
+        title: '摇9个骰子的博弈，兄弟，来吧！'
       }
     },
     methods: {
@@ -109,9 +127,10 @@
         this.index = index
         this.initDices()
         this.results = []
+        this.played = false
       },
       getDiceStyle() {
-        let config = this.diceConfig[this.diceCount],
+        let config = this.diceConfig[this.playDiceCount],
           width = config.w,
           locations = config.lo,
           location = locations[index]
@@ -122,7 +141,7 @@
        */
       initDices() {
         let dices = []
-        for (let i = 0; i < this.diceCount; i++) {
+        for (let i = 0; i < this.playDiceCount; i++) {
           dices.push(6)
         }
         this.dices = dices
@@ -143,16 +162,19 @@
        */
       changeDices() {
         if (rule.close) return
+        this.played = true
 
         this.innerAudioContext.stop()
         this.innerAudioContext.play()
         let newDices = []
-        for (let i = 0; i < this.diceCount; i++) {
+        for (let i = 0; i < this.playDiceCount; i++) {
           newDices.push(Math.floor(Math.random() * rule.max) + 1)
         }
         this.dices = newDices
+        uni.vibrateLong() // 震动
+
         // 如果数量少于最小值, 则当做普通骰子用
-        if(this.diceCount < rule.minCount) return
+        if(this.lessThenMin) return
         
         this.handleDices(newDices)
         rule.close = true
@@ -168,14 +190,14 @@
       handleDices(newDices) {
         let i, j, k
         let newResults = []
-        if (Array.from(new Set(newDices)).length === this.diceCount) { // 去重查看是否是顺子
+        if (Array.from(new Set(newDices)).length === this.playDiceCount) { // 去重查看是否是顺子
           newResults.push('顺子, 全部为 0 个')
         } else {
           let countOne = 0 // 1 的特殊处理
           for (let i = 0; i < rule.max; i++) {
             let j = i + 1
             let countJ = this.howManyCount(j)
-            countJ = countJ === rule.max ? 7 : countJ + countOne
+            countJ = countJ === rule.diceCount ? rule.diceCount + 1 : countJ + countOne
             newResults.push({
               count: countJ,
               dice: j
@@ -186,7 +208,6 @@
           }
         }
         this.results = newResults
-        uni.vibrateLong() // 震动
       },
       /**
        * 计分逻辑
