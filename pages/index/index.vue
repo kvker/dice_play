@@ -188,7 +188,6 @@
        * @param {array} newDices - 新骰子数组, 用来计算返还给 this.dices
        */
       handleDices(newDices) {
-        let i, j, k
         let newResults = []
         if (Array.from(new Set(newDices)).length === this.playDiceCount) { // 去重查看是否是顺子
           newResults.push('顺子, 全部为 0 个')
@@ -214,8 +213,8 @@
        * @param {number} point - 根据传进来的点数遍历所有骰子计算分数(所有数)
        */
       howManyCount(point) {
-        let count = 0
-        let dices = this.dices
+        let count = 0,
+          dices = this.dices
         for (let i = 0; i < dices.length; i++) {
           let item = dices[i]
           if (item === point) {
