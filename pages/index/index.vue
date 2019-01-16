@@ -128,7 +128,7 @@
           key: 'diceCountIndex',
           data: index,
           success(res) {
-            console.log('success')
+            // console.log('success')
           }
         })
       },
