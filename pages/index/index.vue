@@ -45,8 +45,6 @@
 
   let rule = {
     supportDiceNumbers: [5, 6, 7, 8, 9, 4, 3, 2, 1],
-    // 骰子个数
-    diceCount: 5,
     // 禁止变化, 防止多次
     close: false,
     // 两次最小间距时间, 默认 2
@@ -59,8 +57,6 @@
     minCount: 5,
   }
 
-  // console.log(diceConfig)
-
   export default {
     components: {
       MyAd
@@ -68,7 +64,7 @@
     data() {
       return {
         played: false,
-        index: 0,
+        index: uni.getStorageSync('diceCountIndex') || 0,
         supportDiceNumbers: rule.supportDiceNumbers,
         button,
         dices: [],
@@ -90,13 +86,13 @@
        * 是否低于可玩的最小值
        */
       lessThenMin() {
-        return this.playDiceCount < rule.minCount
+        return this.diceCount < rule.minCount
       },
-      playDiceCount() {
+      diceCount() {
         return this.supportDiceNumbers[this.index]
       },
       diceStyles() {
-        let diceConfig = this.diceConfig[this.playDiceCount],
+        let diceConfig = this.diceConfig[this.diceCount],
           width = diceConfig.w,
           los = diceConfig.los,
           results = []
@@ -128,9 +124,16 @@
         this.initDices()
         this.results = []
         this.played = false
+        uni.setStorage({
+          key: 'diceCountIndex',
+          data: index,
+          success(res) {
+            console.log('success')
+          }
+        })
       },
       getDiceStyle() {
-        let config = this.diceConfig[this.playDiceCount],
+        let config = this.diceConfig[this.diceCount],
           width = config.w,
           locations = config.lo,
           location = locations[index]
@@ -141,7 +144,7 @@
        */
       initDices() {
         let dices = []
-        for (let i = 0; i < this.playDiceCount; i++) {
+        for (let i = 0; i < this.diceCount; i++) {
           dices.push(6)
         }
         this.dices = dices
@@ -167,7 +170,7 @@
         this.innerAudioContext.stop()
         this.innerAudioContext.play()
         let newDices = []
-        for (let i = 0; i < this.playDiceCount; i++) {
+        for (let i = 0; i < this.diceCount; i++) {
           newDices.push(Math.floor(Math.random() * rule.max) + 1)
         }
         this.dices = newDices
@@ -189,14 +192,15 @@
        */
       handleDices(newDices) {
         let newResults = []
-        if (Array.from(new Set(newDices)).length === this.playDiceCount) { // 去重查看是否是顺子
+        if (Array.from(new Set(newDices)).length === this.diceCount) { // 去重查看是否是顺子
           newResults.push('顺子, 全部为 0 个')
         } else {
           let countOne = 0 // 1 的特殊处理
           for (let i = 0; i < rule.max; i++) {
-            let j = i + 1
-            let countJ = this.howManyCount(j)
-            countJ = countJ === rule.diceCount ? rule.diceCount + 1 : countJ + countOne
+            let j = i + 1,
+              countJ = this.howManyCount(j),
+              diceCount = this.diceCount
+            countJ = countJ === diceCount ? diceCount + 1 : countJ + countOne
             newResults.push({
               count: countJ,
               dice: j
