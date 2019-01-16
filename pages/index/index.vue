@@ -3,7 +3,6 @@
     <view class="ctrls">
       <picker class="picker-dice-number" @change="changePicker" :value="index" :range="supportDiceNumbers">
         <text>数量: {{supportDiceNumbers[index]}}</text>
-        <!-- <text class="pick-remind">少于5个比点</text> -->
       </picker>
       <image :src="button" class="change change-image" hover-class="change-hover" @click="changeDices"></image>
       <button class="help" @click="clickHelp">?</button>
@@ -47,7 +46,7 @@
     supportDiceNumbers: [5, 6, 7, 8, 9, 4, 3, 2, 1],
     // 禁止变化, 防止多次
     close: false,
-    // 两次最小间距时间, 默认 2
+    // 两次最小间距时间
     closeTime: .25,
     // 摇一摇幅度
     range: 3,
@@ -170,32 +169,34 @@
         this.innerAudioContext.stop()
         this.innerAudioContext.play()
         let newDices = []
+        // 随机生成骰子
         for (let i = 0; i < this.diceCount; i++) {
           newDices.push(Math.floor(Math.random() * rule.max) + 1)
         }
         this.dices = newDices
-        uni.vibrateLong() // 震动
+        // 震动
+        uni.vibrateLong()
 
         // 如果数量少于最小值, 则当做普通骰子用
         if(this.lessThenMin) return
         
         this.handleDices(newDices)
         rule.close = true
-        return setTimeout(() => {
-          rule.close = false
-          return uni.hideLoading()
-        }, rule.closeTime * 1000)
+        return setTimeout(() => rule.close = false, rule.closeTime * 1000)
       },
       /**
        * 处理骰子计分逻辑
        * @param {array} newDices - 新骰子数组, 用来计算返还给 this.dices
+       * @return 返回 { dice: [number],count: [number] } 骰子与数量
        */
       handleDices(newDices) {
         let newResults = []
-        if (Array.from(new Set(newDices)).length === this.diceCount) { // 去重查看是否是顺子
+        // 去重查看是否是顺子
+        if (Array.from(new Set(newDices)).length === this.diceCount) {
           newResults.push('顺子, 全部为 0 个')
         } else {
-          let countOne = 0 // 1 的特殊处理
+          // 1 的特殊处理
+          let countOne = 0
           for (let i = 0; i < rule.max; i++) {
             let j = i + 1,
               countJ = this.howManyCount(j),
@@ -205,7 +206,8 @@
               count: countJ,
               dice: j
             })
-            if (j === 1) { // 1 要留下来充数
+            // 1 要留下来充数
+            if (j === 1) {
               countOne = countJ
             }
           }
@@ -215,6 +217,7 @@
       /**
        * 计分逻辑
        * @param {number} point - 根据传进来的点数遍历所有骰子计算分数(所有数)
+       * @return 返回有几个, 比如4个3
        */
       howManyCount(point) {
         let count = 0,
@@ -227,9 +230,6 @@
         }
         return count
       },
-      /**
-       * 点击前往帮助
-       */
       clickHelp() {
         uni.navigateTo({
           url: '/pages/help/index'
