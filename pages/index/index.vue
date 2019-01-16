@@ -340,8 +340,11 @@
   }
 
   .help {
-    width: var(--height);
-    height: var(--height);
+    --width: 80upx;
+    width: var(--width);
+    height: var(--width);
     margin: 0;
+    background: rgb(252, 157, 93);
+    color: white;
   }
 </style>
