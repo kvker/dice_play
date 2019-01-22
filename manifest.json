@@ -56,7 +56,7 @@
     },
     "h5" : {
         "router" : {
-            "base" : "/DicePlay/",
+            "base" : "/DicePlay/unpackage/dist/build/h5/",
             "mode" : "history"
         },
         "devServer" : {
