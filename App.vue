@@ -20,8 +20,8 @@ input {
 }
 page,
 .container {
-  widows: 100%;
-  height: 100%;
+  width: 100%;
+  height: 100vh;
 }
 image {
   vertical-align: top;

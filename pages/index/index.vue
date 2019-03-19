@@ -69,7 +69,9 @@
         dices: [],
         results: [],
         diceImgs: [dice1, dice2, dice3, dice4, dice5, dice6],
+        // #ifdef MP-WEIXIN
         innerAudioContext: uni.createInnerAudioContext(),
+        //#endif
         diceConfig,
       }
     },
@@ -104,8 +106,8 @@
     onLoad() {
       this.initDices()
       this.listenShake()
-      this.innerAudioContext.src = sound
       //#ifdef MP-WEIXIN
+      this.innerAudioContext.src = sound
       uni.showShareMenu({
         withShareTicket: false
       })
@@ -165,9 +167,10 @@
       changeDices() {
         if (rule.close) return
         this.played = true
-
+        // #ifdef MP-WEIXIN
         this.innerAudioContext.stop()
         this.innerAudioContext.play()
+        //#endif
         let newDices = []
         // 随机生成骰子
         for (let i = 0; i < this.diceCount; i++) {
@@ -178,8 +181,8 @@
         uni.vibrateLong()
 
         // 如果数量少于最小值, 则当做普通骰子用
-        if(this.lessThenMin) return
-        
+        if (this.lessThenMin) return
+
         this.handleDices(newDices)
         rule.close = true
         return setTimeout(() => rule.close = false, rule.closeTime * 1000)
@@ -255,14 +258,14 @@
     padding: 0 20upx;
     font-size: 24upx;
   }
-  
+
   .picker-dice-number {
     position: relative;
     width: var(--width);
     border: 2upx dashed #D8D8D8;
     padding: 2upx 4upx;
   }
-  
+
   .pick-remind {
     position: absolute;
     left: 0;

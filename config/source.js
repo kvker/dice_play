@@ -20,7 +20,7 @@ let sound = '/static/sound.mp3'
 let button = '/static/button.png'
 //#endif
 
-//#ifdef MP-WEIXIN
+//#ifdef MP-WEIXIN || MP-ALIPAY
 let dice1 = '/static/1.png'
 let dice2 = '/static/2.png'
 let dice3 = '/static/3.png'

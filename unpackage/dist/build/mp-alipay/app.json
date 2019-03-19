@@ -1,0 +1,11 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/help/index"
+  ],
+  "window": {
+    "defaultTitle": "摇骰子辅助工具",
+    "titleBarColor": "#d3ffd0",
+    "backgroundColor": "#F8F8F8"
+  }
+}
