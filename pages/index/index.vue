@@ -14,16 +14,15 @@
     </view>
     <view v-else class="results">
       <view class="result" v-for="(item, index) of results" :key="index">
-        <text>{{item.count}} 个</text>
-        <image class="dice-small" :src="diceImgs[item.dice - 1]"></image>
+        <text>{{item.count}}x</text><image class="dice-small" :src="diceImgs[item.dice - 1]"></image>
       </view>
     </view>
     <view class="ctrls">
       <picker class="picker-dice-number" @change="changePicker" :value="index" :range="supportDiceNumbers">
         <text>数量: {{supportDiceNumbers[index]}}</text>
       </picker>
-      <image :src="button" class="change change-image" hover-class="change-hover" @click="changeDices"></image>
-      <button class="help" @click="clickHelp">?</button>
+      <view class="change" hover-class="change-hover" @click="changeDices">摇一摇</view>
+      <view class="help" @click="clickHelp">?</view>
     </view>
   </view>
 </template>
@@ -254,7 +253,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-bottom: var(--top);
+    margin-bottom: 120upx;
     padding: 0 20upx;
     font-size: 24upx;
   }
@@ -276,9 +275,15 @@
   }
 
   .change {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 440upx;
     height: var(--height);
     border-radius: 46upx;
+    background: rgb(252, 157, 93);
+    color: white;
+    font-size: 32upx;
   }
 
   .change:active {
@@ -307,11 +312,11 @@
 
   .results {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
     box-sizing: border-box;
     border-left: 0;
     border-bottom: 0;
-    margin: 0 auto;
   }
 
   .straight {
@@ -327,10 +332,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50%;
-    font-size: 40upx;
+    width: 12%;
+    font-size: 32upx;
     color: #333;
-    margin-top: 40upx;
   }
 
   .dice-small {
@@ -338,15 +342,19 @@
     display: inline-block;
     height: var(--width);
     width: var(--width);
-    margin-left: 16upx;
   }
 
   .help {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     --width: 80upx;
     width: var(--width);
     height: var(--width);
     margin: 0;
     background: rgb(252, 157, 93);
     color: white;
+    font-size: 32upx;
+    border-radius: 8upx;
   }
 </style>
