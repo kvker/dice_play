@@ -1,12 +1,6 @@
 <template>
   <view class="container">
-    <view class="ctrls">
-      <picker class="picker-dice-number" @change="changePicker" :value="index" :range="supportDiceNumbers">
-        <text>数量: {{supportDiceNumbers[index]}}</text>
-      </picker>
-      <image :src="button" class="change change-image" hover-class="change-hover" @click="changeDices"></image>
-      <button class="help" @click="clickHelp">?</button>
-    </view>
+    <my-ad />
     <view class="dices">
       <view class="dice" :style="diceStyles[index]" v-for="(item, index) of dices" :key="index">
         <img mode="aspectFit" class="dice-image" :src="diceImgs[item - 1]">
@@ -24,7 +18,13 @@
         <image class="dice-small" :src="diceImgs[item.dice - 1]"></image>
       </view>
     </view>
-    <my-ad />
+    <view class="ctrls">
+      <picker class="picker-dice-number" @change="changePicker" :value="index" :range="supportDiceNumbers">
+        <text>数量: {{supportDiceNumbers[index]}}</text>
+      </picker>
+      <image :src="button" class="change change-image" hover-class="change-hover" @click="changeDices"></image>
+      <button class="help" @click="clickHelp">?</button>
+    </view>
   </view>
 </template>
 
@@ -69,7 +69,7 @@
         dices: [],
         results: [],
         diceImgs: [dice1, dice2, dice3, dice4, dice5, dice6],
-        // #ifdef MP-WEIXIN
+        // #ifndef MP-ALIPAY
         innerAudioContext: uni.createInnerAudioContext(),
         //#endif
         diceConfig,
@@ -106,7 +106,7 @@
     onLoad() {
       this.initDices()
       this.listenShake()
-      //#ifdef MP-WEIXIN
+      //#ifndef MP-ALIPAY
       this.innerAudioContext.src = sound
       uni.showShareMenu({
         withShareTicket: false
@@ -167,7 +167,7 @@
       changeDices() {
         if (rule.close) return
         this.played = true
-        // #ifdef MP-WEIXIN
+        // #ifndef MP-ALIPAY
         this.innerAudioContext.stop()
         this.innerAudioContext.play()
         //#endif
@@ -254,7 +254,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-top: var(--top);
+    margin-bottom: var(--top);
     padding: 0 20upx;
     font-size: 24upx;
   }
@@ -293,7 +293,6 @@
     flex-wrap: wrap;
     width: 400upx;
     height: 400upx;
-    margin-top: 16upx;
   }
 
   .dice {
@@ -312,7 +311,7 @@
     box-sizing: border-box;
     border-left: 0;
     border-bottom: 0;
-    margin: 16upx 5% 0 5%;
+    margin: 0 auto;
   }
 
   .straight {
