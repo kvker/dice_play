@@ -1,11 +1,12 @@
 //#ifdef H5
-let dice1 = './static/1.png'
-let dice2 = './static/2.png'
-let dice3 = './static/3.png'
-let dice4 = './static/4.png'
-let dice5 = './static/5.png'
-let dice6 = './static/6.png'
-let sound = './static/sound.mp3'
+let href = location.href
+let dice1 = href + '/static/1.png'
+let dice2 = href + '/static/2.png'
+let dice3 = href + '/static/3.png'
+let dice4 = href + '/static/4.png'
+let dice5 = href + '/static/5.png'
+let dice6 = href + '/static/6.png'
+let sound = href + '/static/sound.mp3'
 //#endif
 
 //#ifdef APP-PLUS
@@ -18,14 +19,13 @@ let dice6 = '/static/6.png'
 let sound = '/static/sound.mp3'
 //#endif
 
-//#ifdef MP-WEIXIN || MP-ALIPAY
+//#ifdef MP
 let dice1 = '/static/1.png'
 let dice2 = '/static/2.png'
 let dice3 = '/static/3.png'
 let dice4 = '/static/4.png'
 let dice5 = '/static/5.png'
 let dice6 = '/static/6.png'
-let sound = 'cloud://dice-dev-5f02f6.6469-dice-dev-5f02f6/sound.mp3'
 //#endif
 
 let unit = 1.5
@@ -56,6 +56,5 @@ export {
   dice4,
   dice5,
   dice6,
-  sound,
   diceConfig,
 }

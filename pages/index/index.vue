@@ -36,7 +36,6 @@
     dice4,
     dice5,
     dice6,
-    sound,
     button,
     diceConfig,
   } from '@/config/source.js'
@@ -106,7 +105,7 @@
       this.initDices()
       this.listenShake()
       //#ifndef MP-ALIPAY
-      this.innerAudioContext.src = sound
+      this.innerAudioContext.src = 'https://file.kvker.com/683ac81df66b02fa9d05/sound.mp3'
       uni.showShareMenu({
         withShareTicket: false
       })

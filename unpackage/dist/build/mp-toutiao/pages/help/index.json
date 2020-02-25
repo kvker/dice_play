@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "摇骰子介绍页面",
+  "usingComponents": {
+    "my-ad": "/components/ad"
+  }
+}

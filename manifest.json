@@ -1,5 +1,5 @@
 {
-    "name" : "DicePlay",
+    "name" : "摇骰子辅助工具",
     "appid" : "__UNI__49EC0E8",
     "description" : "",
     "versionName" : "1.0.0",
@@ -51,16 +51,21 @@
         "appid" : "wx370aae98dc3ead4b",
         "setting" : {
             "urlCheck" : true,
-            "minified" : true
+            "minified" : true,
+            "checkSiteMap" : false
         }
     },
     "h5" : {
         "router" : {
-            "base" : "/DicePlay/unpackage/dist/build/h5/",
+            "base" : "/dice_play",
             "mode" : "history"
         },
         "devServer" : {
             "https" : true
-        }
+        },
+        "domain" : ""
+    },
+    "mp-toutiao" : {
+        "appid" : "tt345942e4ab73d725"
     }
 }

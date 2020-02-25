@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "摇骰子万能工具",
+  "usingComponents": {
+    "my-ad": "/components/ad"
+  }
+}

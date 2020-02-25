@@ -95,7 +95,7 @@
         <image class="dice" :src="diceImgs[4]"></image>
       </view>
     </view>
-    <my-ad/>
+    <my-ad />
   </view>
 </template>
 
